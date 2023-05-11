@@ -1,10 +1,15 @@
-import 'dart:convert';
-
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:flutter/foundation.dart';
 
 part 'user_model.freezed.dart';
 part 'user_model.g.dart';
+
+@freezed
+class Results with _$Results {
+  factory Results({required List<User> results}) = _Results;
+
+  factory Results.fromJson(Map<String, Object?> json) => _$ResultsFromJson(json);
+}
 
 @freezed
 class User with _$User {
@@ -13,6 +18,7 @@ class User with _$User {
     required Name name,
     required String email,
     required String phone,
+    required Picture picture,
   }) = _User;
   factory User.fromJson(Map<String, Object?> json) => _$UserFromJson(json);
 }
