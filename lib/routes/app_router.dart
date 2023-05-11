@@ -5,7 +5,19 @@ import 'package:example_auto_route/routes/app_router.gr.dart';
 class AppRouter extends $AppRouter {
   @override
   List<AutoRoute> get routes => [
-        AutoRoute(page: HomeRoute.page, initial: true),
+        AutoRoute(page: UserRoute.page, initial: true),
         AutoRoute(page: SecondRoute.page),
+        AutoRoute(page: MainRoute.page, children: [
+          AutoRoute(page: HomeRoute.page),
+          AutoRoute(
+            page: WrapperImagesR.page,
+            children: [
+              AutoRoute(page: ImagesRoute.page, initial: true),
+              AutoRoute(page: DetailImageRoute.page),
+            ],
+          ),
+          AutoRoute(page: InformationRoute.page),
+          AutoRoute(page: ProfileRoute.page),
+        ]),
       ];
 }

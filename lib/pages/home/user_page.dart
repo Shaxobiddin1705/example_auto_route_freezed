@@ -9,8 +9,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 @RoutePage()
-class HomePage extends StatelessWidget {
-  const HomePage({Key? key}) : super(key: key);
+class UserPage extends StatelessWidget {
+  const UserPage({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -28,12 +28,14 @@ class HomePage extends StatelessWidget {
               padding: const EdgeInsets.symmetric(horizontal: 24),
               child: state.when(
                 initial: () => const Text('There are no users yet', style: TextStyle(fontSize: 18)),
-                loading: () => const Center(child: CircularProgressIndicator()),
+                loading: () =>
+                    SizedBox(height: MediaQuery.of(context).size.height, child: const Center(child: CircularProgressIndicator())),
                 loaded: (User user) => Column(
                   mainAxisSize: MainAxisSize.max,
                   mainAxisAlignment: MainAxisAlignment.center,
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
+                    const SizedBox(height: 60),
                     Center(
                         child: ClipOval(
                       child: CachedNetworkImage(
@@ -54,6 +56,16 @@ class HomePage extends StatelessWidget {
                     _text(title: 'Email', text: user.email),
                     const SizedBox(height: 12),
                     _text(title: 'Phone number', text: user.phone),
+                    const SizedBox(height: 12),
+                    ElevatedButton(
+                      onPressed: () {
+                        context.router.push(const MainRoute());
+                      },
+                      style: ElevatedButton.styleFrom(
+                          minimumSize: const Size(double.infinity, 46),
+                          shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(8))),
+                      child: const Text('Checking BottomNavigationBar'),
+                    )
                   ],
                 ),
               ),
